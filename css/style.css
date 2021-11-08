@@ -1,0 +1,75 @@
+body{
+    background-color: transparent;
+    margin: 0;
+    padding: 0;    
+    min-width:30rem;
+}
+
+/*==========Score Board =============*/
+.scoreBoard{
+    display: flex;
+    justify-content: space-around;
+    background-color: rgb(240, 236, 16);
+}
+
+/*========= Game Board ================ */
+.gameBoard {
+    background-color: black;
+    display: flex;   
+    flex-wrap: wrap;    
+    padding: 5rem;
+    
+}
+.cell {     
+    background-color: rgba(90, 245, 90, 0.835);   
+    margin:0.1rem;          
+    flex: 1 25%;
+    height: 3rem;   
+}
+.cell:hover{
+    box-shadow: 0.1rem 0.1rem 0.8rem red;
+}
+.cell:active{
+    transform: scale(0.95);
+}
+
+#cell1{      
+    border-bottom: solid #dc63f1 0.3rem;
+    border-right: solid #dc63f1 0.3rem;
+}
+#cell2{
+    border-bottom: solid #dc63f1 0.3rem;
+    border-right: solid #dc63f1 0.3rem;
+    border-left: solid #dc63f1 0.3rem;
+}
+#cell3{    
+    border-bottom: solid #dc63f1 0.3rem;
+    border-left: solid #dc63f1 0.3rem;
+}
+#cell4{  
+    border-top: solid #dc63f1 0.3rem;  
+    border-bottom: solid #dc63f1 0.3rem;
+    border-right: solid #dc63f1 0.3rem;
+}
+#cell5{
+    border: solid #dc63f1 0.3rem;    
+}
+#cell6{   
+    border-top: solid #dc63f1 0.3rem;   
+    border-bottom: solid #dc63f1 0.3rem;
+    border-left: solid #dc63f1 0.3rem;
+}
+#cell7{    
+    border-top: solid #dc63f1 0.3rem;    
+    border-right: solid #dc63f1 0.3rem;
+}
+#cell8{
+    border-top: solid #dc63f1 0.3rem;
+    border-right: solid #dc63f1 0.3rem;
+    border-left: solid #dc63f1 0.3rem;
+}
+#cell9{    
+    border-top: solid #dc63f1 0.3rem;   
+    border-left: solid #dc63f1 0.3rem;
+}
+
