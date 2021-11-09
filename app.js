@@ -5,6 +5,8 @@ let gameBoard = document.querySelector(".gameBoard");
 let allBox = document.querySelectorAll(".cell");
 let player1Score = document.querySelector("#player1Score");
 let player2Score = document.querySelector("#player2Score");
+let playerTurn = document.querySelector(".playerTurn");
+
 
 //==================Functions===================
 function resetAll() {
@@ -30,6 +32,8 @@ function resetAll() {
   allBox[6].addEventListener("click", setBox);
   allBox[7].addEventListener("click", setBox);
   allBox[8].addEventListener("click", setBox);
+
+  playerTurn.innerHTML = '<p>Player X Turn</p>';
 }
 
 function playAgain() {
@@ -40,8 +44,13 @@ function playAgain() {
     cell.push(`<button class="cell" id="cell${i + 1}"></button>`);
   }
   gameBoard.innerHTML = cell.join("");
-  player = 1;
-
+  if (player == 1) {
+    player = 1;
+    playerTurn.innerHTML = '<p>Player X Turn</p>'
+  }else if(player == 2){
+    player = 2;
+    playerTurn.innerHTML = '<p>Player O Turn</p>'
+  }
   allBox = document.querySelectorAll(".cell");
 
   allBox[0].addEventListener("click", setBox);
@@ -52,7 +61,9 @@ function playAgain() {
   allBox[5].addEventListener("click", setBox);
   allBox[6].addEventListener("click", setBox);
   allBox[7].addEventListener("click", setBox);
-  allBox[8].addEventListener("click", setBox);
+  allBox[8].addEventListener("click", setBox);  
+
+  
 }
 
 resetAll();
