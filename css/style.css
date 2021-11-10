@@ -4,83 +4,108 @@ body{
     background-color: black;
     margin: 0;
     padding: 0;    
-    min-width:30rem;
+    min-width:50rem;
     text-align: center;
-}
-header{
     font-family: 'Press Start 2P', Courier, monospace;
-    padding: 2rem;
+}
+header{    
+    padding: 1.5rem;
+}
+h1{
+    text-shadow: 0.1rem 0.1rem 0.1rem #ffffff;
 }
 
 /*==========Score Board =============*/
 .scoreBoard{
     display: flex;
     justify-content: space-around;
-    background-color: #26ac47d5;
+    background-color: #0f7b2aca;
     padding: 2rem;    
 }
 
 #player1Score{
     border: 0.3rem solid black;
     padding: 1.5rem;    
-    background-color: #dfdc1dc4;
-    color: #d122dd;
+    background-color: #ecf023b6;
+    color: #cc10da;    
     font-size: 1.5rem;
-    font-family: 'Press Start 2P', Courier, monospace;
+    
 }
 #player2Score{
     border: 0.3rem solid black;
     padding: 1.5rem;    
-    background-color: #dfdc1dc4;
-    color: #d122dd;
+    background-color: #ecf023b6;
+    color: #cc10da;
     font-size: 1.5rem;
-    font-family: 'Press Start 2P', Courier, monospace;
-}
+}    
 
 /*======== Player Turn ===============*/
 .playerTurn{
+    display: flex;
     background-color: #000000;
-    padding: 1rem;
-    color:#ffffff;
-    font-family: 'Press Start 2P', Courier, monospace;
+    padding: 2rem;   
+    align-items: center; 
+    justify-content: center;    
 }
 
+.playerTurn p{
+ background-color: #ffffff;
+ padding: 1rem;
+ color: black; 
+ border-radius: 15px; 
+ width: 20rem; 
+}
 
 /*========= Game Board ================ */
 .gameBoard {
     background-color: black;
     display: flex;   
     flex-wrap: wrap;    
-    padding: 5rem 15rem 0rem 15rem;
-    min-height:15rem ;
-    
+    padding: 0rem 15rem;
+    min-height:15rem ;    
+    justify-content: center;    
+}
+.gameBoard button{
+    font-family: 'Press Start 2P', Courier, monospace;
+    font-size: 2rem;
+    border: none;    
+}
+.oColor{
+    color: #fa0303;
+}
+.xColor{
+    color:#03acfa;
 }
 .cell {     
-    background-color: #26ac47d5; 
+    background-color: #0f7b2aca; 
     flex: 0 1 33%; 
     padding: 1rem;
-    border-radius:3%;
-    
+    height: 5rem;    
 }
 .cell:hover{
-    box-shadow: 0.1rem 0.1rem 0.8rem #ffffff;
+    box-shadow: 0.1rem 0.1rem 0.8rem #ffffff;    
+    background-color: #0b5d20ca;
+    
 }
 .cell:active{
     transform: scale(0.95);
+    background-color: #21c50be5;
 }
 
 #cell1{      
     border-bottom: solid #ed39fa 0.3rem;
     border-right: solid #ed39fa 0.3rem;
+    border-top-left-radius: 2rem;    
 }
 #cell2{
     border-bottom: solid #ed39fa 0.3rem;
     border-right: solid #ed39fa 0.3rem;
-    border-left: solid #ed39fa 0.3rem;
+    border-left: solid #ed39fa 0.3rem;    
 }
 #cell3{    
     border-bottom: solid #ed39fa 0.3rem;
     border-left: solid #ed39fa 0.3rem;
+    border-top-right-radius: 2rem;
 }
 #cell4{  
     border-top: solid #ed39fa 0.3rem;  
@@ -98,6 +123,7 @@ header{
 #cell7{    
     border-top: solid #ed39fa 0.3rem;    
     border-right: solid #ed39fa 0.3rem;
+    border-bottom-left-radius: 2rem;
 }
 #cell8{
     border-top: solid #ed39fa 0.3rem;
@@ -107,10 +133,68 @@ header{
 #cell9{    
     border-top: solid #ed39fa 0.3rem;   
     border-left: solid #ed39fa 0.3rem;
+    border-bottom-right-radius: 2rem;
 }
+
+
+/*=============WINNER BOARD ============*/
+@keyframes winnerX{
+    from{color: #c7d503e7;}
+    to{color:#fa0303}
+}
+@keyframes winnerO{
+    from{color: #c7d503e7;}
+    to{color:#03acfa}
+}
+.winner{
+    font-size: 2rem;
+    width: 100%;       
+}
+#winnerX{
+    color: #fa0303; 
+    animation-name: winnerX;
+    animation-duration: 0.5s;
+    animation-iteration-count: 4;
+}
+#winnerO{
+    color: #03acfa;
+    animation-name: winnerO;
+    animation-duration: 0.5s;
+    animation-iteration-count: 4;
+}
+
 
 /*============ CONTROLS ==================*/
 
 .controls{
     background-color: black;
+    padding: 2rem; 
+    font-family: 'Press Start 2P', Courier, monospace;   
+}
+.controls button {
+    width: 10rem;
+    border-radius: 5rem;
+    background-color: #e72e09d2;
+    color: #07f813ed;    
+    padding: 1rem;       
+    font-family: 'Press Start 2P', Courier, monospace;
+    border: none;    
+}
+.controls button:hover{
+    background-color: #b52205b2;
+}
+
+.controls button:active{
+    transform: scale(0.90);  
+    background-color: #5b27ccb2;
+    color: #e0e406d7; 
+}
+
+#startAgainButton{
+   padding: 1rem;
+   border-radius: 5rem;
+}
+#startAgainButton:active{
+    transform: scale(0.95);
+    background-color: #e9e9e985;
 }

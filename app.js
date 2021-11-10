@@ -61,24 +61,31 @@ function playAgain() {
   allBox[5].addEventListener("click", setBox);
   allBox[6].addEventListener("click", setBox);
   allBox[7].addEventListener("click", setBox);
-  allBox[8].addEventListener("click", setBox);  
-
-  
+  allBox[8].addEventListener("click", setBox);   
 }
 
 resetAll();
 
 function winnerTemplate() {
-  let winnerImgPlayer1 = document.createElement("div");
-  winnerImgPlayer1.innerHTML = '<img src="./img/player1win.png">';
-  let winnerImgPlayer2 = document.createElement("div");
-  winnerImgPlayer2.innerHTML = '<img src="./img/player2win.png">';
+  
   gameBoard.innerHTML = "";
+  playerTurn.innerHTML = '';
+  let winnerImgPlayer1 = document.createElement("div");
+  winnerImgPlayer1.classList.add('winner');
+  winnerImgPlayer1.innerHTML = '<p id=winnerX>Player X has Win!</p>';
+  let winnerImgPlayer2 = document.createElement("div");
+  winnerImgPlayer2.classList.add('winner');
+  winnerImgPlayer2.innerHTML = '<p id=winnerO>Player O has Win!</p>';
+  
   if (player === 2) {
+    score1++;
     gameBoard.appendChild(winnerImgPlayer1);
-  } else if (player === 1) {
+  } else if (player === 1) {    
+    score2++;
     gameBoard.appendChild(winnerImgPlayer2);
   }
+  player1Score.textContent = `Player X Games: ${score1}`;
+  player2Score.textContent = `Player O Games: ${score2}`;
 
   let startAgainButton = document.createElement("div");
   startAgainButton.innerHTML =
@@ -226,25 +233,25 @@ function youWin() {
 }
 
 function setBox() {
-  console.log(player);
+  if (player == 2) {    
+    playerTurn.innerHTML = '<p>Player X Turn</p>'
+  }else if(player == 1){    
+    playerTurn.innerHTML = '<p>Player O Turn</p>'
+  }
   if (player == 1) {
     if (this.innerHTML == "") {
+      this.className += " xColor";
       this.innerHTML = "X";
       player = 2;
     }
   } else if (player == 2) {
     if (this.innerHTML == "") {
+      this.className += " oColor";
       this.innerHTML = "O";
       player = 1;
     }
   }
-  youWin();
-
-  if (youWin() && player == 2) {
-    score1++;
-  } else if (youWin() && player == 1) {
-    score2++;
-  }
+  youWin();  
 }
 
 //================GAME BOARD =================
