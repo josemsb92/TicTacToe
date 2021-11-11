@@ -6,14 +6,32 @@ let allBox = document.querySelectorAll(".cell");
 let player1Score = document.querySelector("#player1Score");
 let player2Score = document.querySelector("#player2Score");
 let playerTurn = document.querySelector(".playerTurn");
-
-
+let controls = document.querySelector(".controls");
+let buttonResetInit = (controls.innerHTML =
+  '<button id="resetButton">RESET</button>');
+let buttonReset = document.querySelector("#resetButton");
+let scoreBoard = document.querySelector('.scoreBoard');
+let singlePlayerButton = document.querySelector('#single');
+let multiplayerButton = document.querySelector('#multiplayer');
+let chooseMode = document.querySelector('.chooseMode');
+gameBoard.style.display='none';
+scoreBoard.style.display='none';
+playerTurn.style.display='none';
 //==================Functions===================
-function resetAll() {
-  score1 = 0;
-  score2 = 0;
-  player1Score.textContent = `Player X Games: ${score1}`;
-  player2Score.textContent = `Player O Games: ${score2}`;
+multiplayerButton.addEventListener('click', function(){setGame()});
+
+function resetGame(){
+  chooseMode.style.display='flex';
+  gameBoard.style.display='none';
+  scoreBoard.style.display='none';
+  playerTurn.style.display='none';
+}
+
+function setGame() { 
+  chooseMode.style.display='none';
+  gameBoard.style.display='flex';
+  scoreBoard.style.display='flex';
+  playerTurn.style.display='flex';
   let cell = [];
   for (let i = 0; i < 9; i++) {
     cell.push(`<button class="cell" id="cell${i + 1}"></button>`);
@@ -32,9 +50,14 @@ function resetAll() {
   allBox[6].addEventListener("click", setBox);
   allBox[7].addEventListener("click", setBox);
   allBox[8].addEventListener("click", setBox);
+  score1 = 0;
+  score2 = 0;
+  player1Score.textContent = `Player X Games: ${score1}`;
+  player2Score.textContent = `Player O Games: ${score2}`;
 
   playerTurn.innerHTML = '<p>Player X Turn</p>';
 }
+
 
 function playAgain() {
   player1Score.textContent = `Player X Games: ${score1}`;
@@ -64,7 +87,7 @@ function playAgain() {
   allBox[8].addEventListener("click", setBox);   
 }
 
-resetAll();
+
 
 function winnerTemplate() {
   
@@ -257,11 +280,8 @@ function setBox() {
 //================GAME BOARD =================
 
 //================Controls====================
-let controls = document.querySelector(".controls");
-let buttonResetInit = (controls.innerHTML =
-  '<button id="resetButton">RESET</button>');
-let buttonReset = document.querySelector("#resetButton");
+
 
 //==================Events======================
 
-buttonReset.addEventListener("click", resetAll);
+buttonReset.addEventListener("click", resetGame);

@@ -11,9 +11,31 @@ body{
 header{    
     padding: 1.5rem;
 }
-h1{
+header h1{
     text-shadow: 0.1rem 0.1rem 0.1rem #ffffff;
 }
+/*========== Game Mode============*/
+
+.chooseMode{
+    display: flex;
+    justify-content: center;
+    padding: 5rem 10rem;
+    flex-wrap: wrap;
+    
+}
+.chooseMode h1{
+    width: 100%;
+}
+.chooseMode button{
+    padding: 2rem;
+    width: 15rem;
+    margin: 3rem;
+    font-family: 'Press Start 2P', Courier, monospace;
+}
+.chooseMode button:hover{
+    background-color:#9f9f9ff5;
+}
+
 
 /*==========Score Board =============*/
 .scoreBoard{
