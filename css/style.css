@@ -35,8 +35,17 @@ header h1{
 .chooseMode button:hover{
     background-color:#9f9f9ff5;
 }
-
-
+.chooseMode button:active{
+    transform: scale(0.95);
+    animation-name: gameChosen;
+    animation-duration: 0.7s;
+    animation-iteration-count: 3;
+}
+@keyframes gameChosen{
+    from{ background-color:#9f9f9ff5;}
+    to{background-color: #174c65;
+        color:#b4c70cc4}
+}
 /*==========Score Board =============*/
 .scoreBoard{
     display: flex;

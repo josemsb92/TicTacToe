@@ -1,5 +1,7 @@
 let score1;
 let score2;
+let singleGame = false;
+let multiplayerGame = false;
 let player = 1;
 let gameBoard = document.querySelector(".gameBoard");
 let allBox = document.querySelectorAll(".cell");
@@ -17,80 +19,135 @@ let chooseMode = document.querySelector('.chooseMode');
 gameBoard.style.display='none';
 scoreBoard.style.display='none';
 playerTurn.style.display='none';
-//==================Functions===================
-multiplayerButton.addEventListener('click', function(){setGame()});
+//===========================Functions============================
+multiplayerButton.addEventListener('click', function(){
+  multiplayerGame = true;
+  setGame();  
+});
+singlePlayerButton.addEventListener('click', function(){
+  singleGame=true;
+  setGame();  
+});
+function singlePlayer(){    
+    chooseMode.style.display='none';
+    gameBoard.style.display='flex';
+    scoreBoard.style.display='flex';
+    playerTurn.style.display='flex';
+    let cell = [];
+    for (let i = 0; i < 9; i++) {
+      cell.push(`<button class="cell" id="cell${i + 1}"></button>`);
+    }
+    gameBoard.innerHTML = cell.join("");
+    player = 1;
 
+    allBox = document.querySelectorAll(".cell");
+
+    allBox[0].addEventListener("click", setboxIA);
+    allBox[1].addEventListener("click", setboxIA);
+    allBox[2].addEventListener("click", setboxIA);
+    allBox[3].addEventListener("click", setboxIA);
+    allBox[4].addEventListener("click", setboxIA);
+    allBox[5].addEventListener("click", setboxIA);
+    allBox[6].addEventListener("click", setboxIA);
+    allBox[7].addEventListener("click", setboxIA);
+    allBox[8].addEventListener("click", setboxIA);
+    score1 = 0;
+    score2 = 0;
+    player1Score.textContent = `Player X Games: ${score1}`;
+    player2Score.textContent = `Player O Games: ${score2}`;
+
+    playerTurn.innerHTML = '<p>Player X Turn</p>'; 
+}
 function resetGame(){
+  singleGame = false;
+  multiplayerGame = false;
   chooseMode.style.display='flex';
   gameBoard.style.display='none';
   scoreBoard.style.display='none';
   playerTurn.style.display='none';
 }
 
-function setGame() { 
-  chooseMode.style.display='none';
-  gameBoard.style.display='flex';
-  scoreBoard.style.display='flex';
-  playerTurn.style.display='flex';
-  let cell = [];
-  for (let i = 0; i < 9; i++) {
-    cell.push(`<button class="cell" id="cell${i + 1}"></button>`);
-  }
-  gameBoard.innerHTML = cell.join("");
-  player = 1;
+function setGame() {  
+    chooseMode.style.display='none';
+    gameBoard.style.display='flex';
+    scoreBoard.style.display='flex';
+    playerTurn.style.display='flex';
+    let cell = [];
+    for (let i = 0; i < 9; i++) {
+      cell.push(`<button class="cell" id="cell${i + 1}"></button>`);
+    }
+    gameBoard.innerHTML = cell.join("");
+    player = 1;
 
-  allBox = document.querySelectorAll(".cell");
+    allBox = document.querySelectorAll(".cell");
+    if(singleGame){
+      allBox[0].addEventListener("click", setboxIA);
+      allBox[1].addEventListener("click", setboxIA);
+      allBox[2].addEventListener("click", setboxIA);
+      allBox[3].addEventListener("click", setboxIA);
+      allBox[4].addEventListener("click", setboxIA);
+      allBox[5].addEventListener("click", setboxIA);
+      allBox[6].addEventListener("click", setboxIA);
+      allBox[7].addEventListener("click", setboxIA);
+      allBox[8].addEventListener("click", setboxIA);
+    }else{
+      allBox[0].addEventListener("click", setBox);
+      allBox[1].addEventListener("click", setBox);
+      allBox[2].addEventListener("click", setBox);
+      allBox[3].addEventListener("click", setBox);
+      allBox[4].addEventListener("click", setBox);
+      allBox[5].addEventListener("click", setBox);
+      allBox[6].addEventListener("click", setBox);
+      allBox[7].addEventListener("click", setBox);
+      allBox[8].addEventListener("click", setBox);
+      score1 = 0;
+      score2 = 0;
+      player1Score.textContent = `Player X Games: ${score1}`;
+      player2Score.textContent = `Player O Games: ${score2}`;
 
-  allBox[0].addEventListener("click", setBox);
-  allBox[1].addEventListener("click", setBox);
-  allBox[2].addEventListener("click", setBox);
-  allBox[3].addEventListener("click", setBox);
-  allBox[4].addEventListener("click", setBox);
-  allBox[5].addEventListener("click", setBox);
-  allBox[6].addEventListener("click", setBox);
-  allBox[7].addEventListener("click", setBox);
-  allBox[8].addEventListener("click", setBox);
-  score1 = 0;
-  score2 = 0;
-  player1Score.textContent = `Player X Games: ${score1}`;
-  player2Score.textContent = `Player O Games: ${score2}`;
+      playerTurn.innerHTML = '<p>Player X Turn</p>';
+    }
 
-  playerTurn.innerHTML = '<p>Player X Turn</p>';
 }
 
 
 function playAgain() {
-  player1Score.textContent = `Player X Games: ${score1}`;
-  player2Score.textContent = `Player O Games: ${score2}`;
-  let cell = [];
-  for (let i = 0; i < 9; i++) {
-    cell.push(`<button class="cell" id="cell${i + 1}"></button>`);
-  }
-  gameBoard.innerHTML = cell.join("");
-  if (player == 1) {
-    player = 1;
-    playerTurn.innerHTML = '<p>Player X Turn</p>'
-  }else if(player == 2){
-    player = 2;
-    playerTurn.innerHTML = '<p>Player O Turn</p>'
-  }
-  allBox = document.querySelectorAll(".cell");
+  if(singleGame){
+    player1Score.textContent = `Player X Games: ${score1}`;
+    player2Score.textContent = `Player O Games: ${score2}`;
+    singlePlayer();
+  }else{
+    player1Score.textContent = `Player X Games: ${score1}`;
+    player2Score.textContent = `Player O Games: ${score2}`;
+    let cell = [];
+    for (let i = 0; i < 9; i++) {
+      cell.push(`<button class="cell" id="cell${i + 1}"></button>`);
+    }
+    gameBoard.innerHTML = cell.join("");
+    if (player === 1) {
+      player = 1;
+      playerTurn.innerHTML = '<p>Player X Turn</p>'
+    }else if(player === 2){
+      player = 2;
+      playerTurn.innerHTML = '<p>Player O Turn</p>'
+    }
+    allBox = document.querySelectorAll(".cell");
 
-  allBox[0].addEventListener("click", setBox);
-  allBox[1].addEventListener("click", setBox);
-  allBox[2].addEventListener("click", setBox);
-  allBox[3].addEventListener("click", setBox);
-  allBox[4].addEventListener("click", setBox);
-  allBox[5].addEventListener("click", setBox);
-  allBox[6].addEventListener("click", setBox);
-  allBox[7].addEventListener("click", setBox);
-  allBox[8].addEventListener("click", setBox);   
+    allBox[0].addEventListener("click", setBox);
+    allBox[1].addEventListener("click", setBox);
+    allBox[2].addEventListener("click", setBox);
+    allBox[3].addEventListener("click", setBox);
+    allBox[4].addEventListener("click", setBox);
+    allBox[5].addEventListener("click", setBox);
+    allBox[6].addEventListener("click", setBox);
+    allBox[7].addEventListener("click", setBox);
+    allBox[8].addEventListener("click", setBox);   
+  }
 }
 
 
 
-function winnerTemplate() {
-  
+function winnerTemplate() {  
   gameBoard.innerHTML = "";
   playerTurn.innerHTML = '';
   let winnerImgPlayer1 = document.createElement("div");
@@ -101,9 +158,11 @@ function winnerTemplate() {
   winnerImgPlayer2.innerHTML = '<p id=winnerO>Player O has Win!</p>';
   
   if (player === 2) {
+    console.log(player);
     score1++;
     gameBoard.appendChild(winnerImgPlayer1);
   } else if (player === 1) {    
+    console.log(player);
     score2++;
     gameBoard.appendChild(winnerImgPlayer2);
   }
@@ -117,138 +176,218 @@ function winnerTemplate() {
 }
 
 function youWin() {
-  if (
-    allBox[0].textContent == "X" &&
-    allBox[1].textContent == "X" &&
-    allBox[2].textContent == "X"
-  ) {
+  if (    
+    allBox[0].textContent === "X" &&
+    allBox[1].textContent === "X" &&
+    allBox[2].textContent === "X")   
+   {
+    console.log(
+      allBox[0].textContent === "X",
+      allBox[1].textContent === "X",
+      allBox[2].textContent === "X"
+    )
     winnerTemplate();
     startAgainButton.addEventListener("click", playAgain);
     return true;
   } else if (
-    allBox[0].textContent == "O" &&
-    allBox[1].textContent == "O" &&
-    allBox[2].textContent == "O"
+    allBox[0].textContent === "O" &&
+    allBox[1].textContent === "O" &&
+    allBox[2].textContent === "O"
   ) {
+    console.log(
+      allBox[0].textContent === "O",
+      allBox[1].textContent === "O",
+      allBox[2].textContent === "O"
+    )
     winnerTemplate();
     startAgainButton.addEventListener("click", playAgain);
     return true;
   }
   if (
-    allBox[3].textContent == "X" &&
-    allBox[4].textContent == "X" &&
-    allBox[5].textContent == "X"
+    allBox[3].textContent === "X" &&
+    allBox[4].textContent === "X" &&
+    allBox[5].textContent === "X"
   ) {
+    console.log(
+      allBox[3].textContent === "X",
+    allBox[4].textContent === "X",
+    allBox[5].textContent === "X"
+    )
     winnerTemplate();
     startAgainButton.addEventListener("click", playAgain);
     return true;
   } else if (
-    allBox[3].textContent == "O" &&
-    allBox[4].textContent == "O" &&
-    allBox[5].textContent == "O"
+    allBox[3].textContent === "O" &&
+    allBox[4].textContent === "O" &&
+    allBox[5].textContent === "O"
   ) {
+    console.log(
+      allBox[3].textContent === "O" ,
+    allBox[4].textContent === "O" ,
+    allBox[5].textContent === "O"
+    )
     winnerTemplate();
     startAgainButton.addEventListener("click", playAgain);
     return true;
   }
   if (
-    allBox[6].textContent == "X" &&
-    allBox[7].textContent == "X" &&
-    allBox[8].textContent == "X"
+    allBox[6].textContent === "X" &&
+    allBox[7].textContent === "X" &&
+    allBox[8].textContent === "X"
   ) {
+    console.log(
+      allBox[6].textContent === "X" ,
+      allBox[7].textContent === "X" ,
+      allBox[8].textContent === "X"
+    )
     winnerTemplate();
     startAgainButton.addEventListener("click", playAgain);
     return true;
   } else if (
-    allBox[6].textContent == "O" &&
-    allBox[7].textContent == "O" &&
-    allBox[8].textContent == "O"
+    allBox[6].textContent === "O" &&
+    allBox[7].textContent === "O" &&
+    allBox[8].textContent === "O"
   ) {
+    console.log(
+      allBox[6].textContent === "O" ,
+    allBox[7].textContent === "O" ,
+    allBox[8].textContent === "O"
+    )
     winnerTemplate();
     startAgainButton.addEventListener("click", playAgain);
     return true;
   }
   if (
-    allBox[0].textContent == "X" &&
-    allBox[3].textContent == "X" &&
-    allBox[6].textContent == "X"
+    allBox[0].textContent === "X" &&
+    allBox[3].textContent === "X" &&
+    allBox[6].textContent === "X"
   ) {
+    console.log(
+      allBox[0].textContent === "X" ,
+    allBox[3].textContent === "X" ,
+    allBox[6].textContent === "X"
+    )
     winnerTemplate();
     startAgainButton.addEventListener("click", playAgain);
     return true;
   } else if (
-    allBox[0].textContent == "O" &&
-    allBox[3].textContent == "O" &&
-    allBox[6].textContent == "O"
+    allBox[0].textContent === "O" &&
+    allBox[3].textContent === "O" &&
+    allBox[6].textContent === "O"
   ) {
+    console.log(
+      allBox[0].textContent === "O",
+    allBox[3].textContent === "O",
+    allBox[6].textContent === "O"
+    )
     winnerTemplate();
     startAgainButton.addEventListener("click", playAgain);
     return true;
   }
   if (
-    allBox[1].textContent == "X" &&
-    allBox[4].textContent == "X" &&
-    allBox[7].textContent == "X"
+    allBox[1].textContent === "X" &&
+    allBox[4].textContent === "X" &&
+    allBox[7].textContent === "X"
   ) {
+    console.log(
+      allBox[1].textContent === "X" ,
+    allBox[4].textContent === "X" ,
+    allBox[7].textContent === "X"
+    )
     winnerTemplate();
     startAgainButton.addEventListener("click", playAgain);
     return true;
   } else if (
-    allBox[1].textContent == "O" &&
-    allBox[4].textContent == "O" &&
-    allBox[7].textContent == "O"
+    allBox[1].textContent === "O" &&
+    allBox[4].textContent === "O" &&
+    allBox[7].textContent === "O"
   ) {
+    console.log(
+      allBox[1].textContent === "O" ,
+    allBox[4].textContent === "O" ,
+    allBox[7].textContent === "O"
+    )
     winnerTemplate();
     startAgainButton.addEventListener("click", playAgain);
     return true;
   }
   if (
-    allBox[2].textContent == "X" &&
-    allBox[5].textContent == "X" &&
-    allBox[8].textContent == "X"
+    allBox[2].textContent === "X" &&
+    allBox[5].textContent === "X" &&
+    allBox[8].textContent === "X"
   ) {
+    console.log(
+      allBox[2].textContent === "X" ,
+    allBox[5].textContent === "X" ,
+    allBox[8].textContent === "X"
+    )
     winnerTemplate();
     startAgainButton.addEventListener("click", playAgain);
     return true;
   } else if (
-    allBox[2].textContent == "O" &&
-    allBox[5].textContent == "O" &&
-    allBox[8].textContent == "O"
+    allBox[2].textContent === "O" &&
+    allBox[5].textContent === "O" &&
+    allBox[8].textContent === "O"
   ) {
+    console.log(
+      allBox[2].textContent === "O" ,
+    allBox[5].textContent === "O",
+    allBox[8].textContent === "O"
+    )
     winnerTemplate();
     startAgainButton.addEventListener("click", playAgain);
     return true;
   }
   if (
-    allBox[0].textContent == "X" &&
-    allBox[4].textContent == "X" &&
-    allBox[8].textContent == "X"
+    allBox[0].textContent === "X" &&
+    allBox[4].textContent === "X" &&
+    allBox[8].textContent === "X"
   ) {
+    console.log(
+      allBox[0].textContent === "X" ,
+      allBox[4].textContent === "X" ,
+      allBox[8].textContent === "X"
+    )
     winnerTemplate();
     startAgainButton.addEventListener("click", playAgain);
     return true;
   } else if (
-    allBox[0].textContent == "O" &&
-    allBox[4].textContent == "O" &&
-    allBox[8].textContent == "O"
+    allBox[0].textContent === "O" &&
+    allBox[4].textContent === "O" &&
+    allBox[8].textContent === "O"
   ) {
+    console.log(
+      allBox[0].textContent === "O" ,
+      allBox[4].textContent === "O" ,
+      allBox[8].textContent === "O"
+    )
     winnerTemplate();
     startAgainButton.addEventListener("click", playAgain);
     return true;
   }
   if (
-    allBox[2].textContent == "X" &&
-    allBox[4].textContent == "X" &&
-    allBox[6].textContent == "X"
+    allBox[2].textContent === "X" &&
+    allBox[4].textContent === "X" &&
+    allBox[6].textContent === "X"
   ) {
+    console.log(
+      allBox[2].textContent === "X" ,
+    allBox[4].textContent === "X" ,
+    allBox[6].textContent === "X"
+    )
     winnerTemplate();
     startAgainButton.addEventListener("click", playAgain);
     return true;
   } else if (
-    allBox[2].textContent == "O" &&
-    allBox[4].textContent == "O" &&
-    allBox[6].textContent == "O"
+    allBox[2].textContent === "O" &&
+    allBox[4].textContent === "O" &&
+    allBox[6].textContent === "O"
   ) {
+    console.log(
+      allBox[2].textContent === "O" ,
+    allBox[4].textContent === "O" ,
+    allBox[6].textContent === "O"
+    )
     winnerTemplate();
     startAgainButton.addEventListener("click", playAgain);
     return true;
@@ -256,19 +395,19 @@ function youWin() {
 }
 
 function setBox() {
-  if (player == 2) {    
+  if (player === 2) {    
     playerTurn.innerHTML = '<p>Player X Turn</p>'
-  }else if(player == 1){    
+  }else if(player === 1){    
     playerTurn.innerHTML = '<p>Player O Turn</p>'
   }
-  if (player == 1) {
-    if (this.innerHTML == "") {
+  if (player === 1) {
+    if (this.innerHTML === "") {
       this.className += " xColor";
       this.innerHTML = "X";
       player = 2;
     }
-  } else if (player == 2) {
-    if (this.innerHTML == "") {
+  } else if (player === 2) {
+    if (this.innerHTML === "") {
       this.className += " oColor";
       this.innerHTML = "O";
       player = 1;
@@ -277,11 +416,45 @@ function setBox() {
   youWin();  
 }
 
-//================GAME BOARD =================
+function setboxIA(){
+  if (player === 2) {    
+    playerTurn.innerHTML = '<p>Player X Turn</p>'
+  }else if(player === 1){    
+    playerTurn.innerHTML = '<p>Player O Turn</p>'
+  }
+  if (player === 1) {
+    if (this.innerHTML === "") {
+      this.className += " xColor";
+      this.innerHTML = "X";
+      player = 2;
+    }  
+    let iaSelect = (allBox[Math.floor(Math.random()*8)]);
+    while(iaSelect.innerHTML !=""){ 
+     for(let i = 0; i<allBox.length; i++){
+       if(allBox[i].innerHTML === ""){         
+         iaSelect = allBox[i];
+       }
+     }
+     if(iaSelect.innerHTML != ""){
+       break;
+     }
+      
+    } 
+    console.log(iaSelect)
+    if (iaSelect.innerHTML === "")
+      iaSelect.className += " oColor";
+      iaSelect.innerHTML = "O";
+      player = 1;  
+      
+  }
+  youWin();  
+}
 
-//================Controls====================
+//========================GAME BOARD =========================
+
+//========================Controls==============================
 
 
-//==================Events======================
+//===========================Events=================================
 
 buttonReset.addEventListener("click", resetGame);
